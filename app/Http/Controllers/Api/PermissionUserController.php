@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SyncPermissionsOfUser;
+use App\Http\Requests\SyncPermissionsOfUserRequest;
 use App\Http\Resources\PermissionResource;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
@@ -11,10 +13,10 @@ use Illuminate\Http\Response;
 class PermissionUserController extends Controller
 {
     public function __construct(private UserRepository $userRepository)
-    { 
+    {
     }
 
-    public function syncPermissionsOfUser(string $id, Request $request)
+    public function syncPermissionsOfUser(string $id, SyncPermissionsOfUserRequest $request)
     {
         $response = $this->userRepository->syncPermissions($id, $request->permissions);
         if (!$response) {
